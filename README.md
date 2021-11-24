@@ -18,9 +18,7 @@ A alteração de saldo de conta é feita através de movimentos de conta. Estes 
 
 O saldo da conta só pode ficar a negativo se for necessário para o pagamento da taxa de movimento, ou se a conta estiver autorizada para movimentos a descoberto.
 
-Todas as classes que produzir deve estar testadas com testes unitários, e com cobertura 100%.
-
-Deve produzir a documentação `javadoc` para todas as classes, atributos, e métodos públicos.
+Todas as classes públicas devem ser testadas com testes unitários. Deve produzir a documentação `javadoc` para todas as classes, atributos, e métodos públicos.
 
 # Tarefas
 
