@@ -1,7 +1,9 @@
 package views;
 
 import controllers.Bank;
+import models.Client;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class CLI {
@@ -46,6 +48,21 @@ public class CLI {
                         System.out.println("Dados de cliente alterados com sucesso.");
                     }
                     break;
+                case "LC":
+                    if(!bank.hasClients()) {
+                        System.out.println("Sem clientes registados.");
+                    }
+                    else {
+                        Collection<Client> clients = bank.getClients();
+                        // TODO: sort the client collection
+                        for(final var client : clients) {
+                            System.out.println("["+client.getId()+" "+client.getIdTypeSymbol()+"]"+
+                                    client.getBirthday() + " " + client.getName() +
+                                    "("+client.getEmail()+")"+
+                                    "("+client.getPhoneNumber()+")"+
+                                    "("+client.getAddress()+")");
+                        }
+                    }
                 default:
                     System.out.println("Instrução inválida.");
             }
