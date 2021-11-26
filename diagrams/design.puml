@@ -1,0 +1,82 @@
+@startuml
+package models {
+    class Client {
+        -String name
+        -String identificationNumber
+        -IdentificationType identificationType
+        -Date birthday
+        -String address
+        -String email
+        -String phoneNumber
+        -Collection<Account> accounts
+        -Collection<Account> sharedAccounts
+    }
+
+    class IdentificationType {
+        -String name
+        -String symbol
+    }
+
+    class Account {
+        -double balance
+        -Client owner
+        -String id
+        -boolean allowDebt
+        -Collection<Client> sharedClients
+        -Collection<Cashflow> cashflows
+    }
+
+    class Cashflow {
+        -Date date
+        -double value
+        -CashflowRate rate
+    }
+
+    class CashflowRate {
+        -Date startedAd
+        -double value
+    }
+
+    Client "1" *-- "0..*" Account : owner
+    Client "0..*" *-- "0..*" Account : shared
+    Client "0..*" -- "1" IdentificationType
+    Account "1" *-- "0..*" Cashflow
+    Cashflow "0..*" -- "1" CashflowRate
+}
+
+package controllers {
+    class Bank {
+        -Collection<Client> clients
+        -Collection<Account> accounts
+        -Collection<CashflowRate> rates
+        +boolean hasClient(String clientId, String idType)
+        +void createClient(String clientId, String idType, String name, Date birthday, String email, String phoneNumber, String address)
+        +void changeClient(String clientId, String idType, String name, Date birthday, String email, String phoneNumber, String address)
+        +boolean hasClients()
+        +Collection<Client> getClients()
+        +boolean isAmountValid(double amount, boolean allowDebt)
+        +String createAccount(String clientId, String clientIdType, boolean allowDebt, double initialAmount)
+        +boolean hasAccount(String accountNumber)
+        +void shareAccount(String clientId, String clientIdType, String accountId, String sharedClientId, String sharedClientIdType)
+        +boolean isAuthorized(String clientId, String clientIdType, String accountId)   
+        +boolean isCashflowAllowed(String accountId, double amount)
+        +void registerCashflow(String clientId, String clientIdType, String accountId, double amount)
+        +Account getAccount(String accountId)
+        +void save(String filename)
+        +{static}Bank load(String filename)
+    }
+    Bank "1" *-- "0..*" Client
+    Bank "1" *-- "0..*" Account
+    Bank "1" *-- "0..*" CashflowRate
+}
+
+package views {
+    class CLI
+    class GUI
+    class WebApp
+}
+
+CLI "0..*" -- "1" Bank
+WebApp "0..*" -- "1" Bank
+GUI "0..*" -- "1" Bank
+@enduml
