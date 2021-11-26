@@ -24,8 +24,7 @@ public class CLI {
                     var address = scanner.nextLine();
                     if(bank.hasClient(clientId, clientIdType)) {
                         System.out.println("Cliente existente.");
-                    }
-                    else {
+                    } else {
                         bank.createClient(clientId, clientIdType, birthday, email, phoneNumber, clientName, address);
                         System.out.println("Cliente registado com sucesso.");
                     }
@@ -40,10 +39,9 @@ public class CLI {
                     phoneNumber = splits[2];
                     clientName = scanner.nextLine();
                     address = scanner.nextLine();
-                    if(!bank.hasClient(clientId,clientIdType)){
+                    if(!bank.hasClient(clientId, clientIdType)) {
                         System.out.println("Cliente inexistente.");
-                    }
-                    else {
+                    } else {
                         bank.changeClient(clientId, clientIdType, birthday, email, phoneNumber, clientName, address);
                         System.out.println("Dados de cliente alterados com sucesso.");
                     }
@@ -51,18 +49,36 @@ public class CLI {
                 case "LC":
                     if(!bank.hasClients()) {
                         System.out.println("Sem clientes registados.");
-                    }
-                    else {
+                    } else {
                         Collection<Client> clients = bank.getClients();
                         // TODO: sort the client collection
                         for(final var client : clients) {
-                            System.out.println("["+client.getId()+" "+client.getIdTypeSymbol()+"]"+
+                            System.out.println("[" + client.getId() + " " + client.getIdTypeSymbol() + "]" +
                                     client.getBirthday() + " " + client.getName() +
-                                    "("+client.getEmail()+")"+
-                                    "("+client.getPhoneNumber()+")"+
-                                    "("+client.getAddress()+")");
+                                    "(" + client.getEmail() + ")" +
+                                    "(" + client.getPhoneNumber() + ")" +
+                                    "(" + client.getAddress() + ")");
                         }
                     }
+                    break;
+                case "NC":
+                    clientId = commands[1];
+                    clientIdType = commands[2];
+                    final var allowDebtParam = commands[3];
+                    final var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
+                    var amount = 0.0;
+                    if(commands.length == 5) {
+                        amount = Double.parseDouble(commands[4]);
+                    }
+                    if(!bank.hasClient(clientId, clientIdType)) {
+                        System.out.println("Cliente inexistente.");
+                    } else if(!bank.isAmountValid(amount, allowDebt)) {
+                        System.out.println("Montante não autorizado.");
+                    } else {
+                        String accountId = bank.createAccount(clientId, clientIdType, allowDebt, amount);
+                        System.out.println("Conta criada com o identificador " + accountId);
+                    }
+                    break;
                 default:
                     System.out.println("Instrução inválida.");
             }

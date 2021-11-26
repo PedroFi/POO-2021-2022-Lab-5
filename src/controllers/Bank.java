@@ -23,4 +23,12 @@ public class Bank {
     public boolean hasClients() {
         return false;
     }
+
+    public String createAccount(final String clientId, final String clientIdType, final boolean allowDebt, final double amount) {
+        return null;
+    }
+
+    public boolean isAmountValid(final double amount, final boolean allowDebt) {
+        return false;
+    }
 }
