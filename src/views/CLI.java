@@ -113,7 +113,7 @@ public class CLI {
                     else if(!bank.isAuthorized(clientId, clientIdType, accountId)) {
                         System.out.println("Cliente não autorizado.");
                     }
-                    else if(!bank.isAmountValid(amount, bank.getAccount(accountId).getAllowDebt())) {
+                    else if(!bank.isCashFlowAllowed(accountId, amount)) {
                         System.out.println("Montante não autorizado.");
                     }
                     else {
