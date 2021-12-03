@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Collection;
+
 public class Client {
     public String getId() {
         return null;
