@@ -104,19 +104,21 @@ public class CLI {
                     clientIdType = commands[2];
                     accountId = commands[3];
                     amount = Double.parseDouble(commands[4]);
-                    if(!bank.hasClient(clientId, clientIdType)) {
+
+                    if(!bank.hasClient(clientId, clientIdType)){
                         System.out.println("Cliente inexistente.");
                     }
-                    else if(!bank.hasAccount(accountId)) {
+                    else if (!bank.hasAccount(accountId)){
                         System.out.println("Conta inexistente.");
                     }
-                    else if(!bank.isAuthorized(clientId, clientIdType, accountId)) {
+                    else if (!bank.isAuthorized(clientId, clientIdType, accountId)){
                         System.out.println("Cliente não autorizado.");
                     }
-                    else if(!bank.isCashFlowAllowed(accountId, amount)) {
+                    else if (!bank.isCashflowAllowed(accountId, amount)){
                         System.out.println("Montante não autorizado.");
                     }
-                    else {
+                    else{
+                        bank.registerCashflow(clientId, clientIdType, accountId, amount);
                         System.out.println("Movimento efetuado com sucesso.");
                     }
                     break;
