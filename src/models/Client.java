@@ -28,4 +28,8 @@ public class Client {
     public String getAddress() {
         return null;
     }
+
+    public Collection<Account> getAccounts() { return null; }
+
+    public Collection<Account> getSharedAccounts() { return null; }
 }
