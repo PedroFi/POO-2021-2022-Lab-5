@@ -102,7 +102,7 @@ public class CLI {
                     clientId = commands[1];
                     clientIdType = commands[2];
                     accountId = commands[3];
-                    amount = commands[4];
+                    amount = Double.parseDouble(commands[4]);
                     if(!bank.hasClient(clientId, clientIdType) || !bank.hasClient(sharedClientId, sharedClientIdType)){
                         System.out.println("Cliente inexistente.");
                     }
