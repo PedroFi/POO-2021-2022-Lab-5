@@ -98,6 +98,26 @@ public class CLI {
                         System.out.println("Conta partilhada com sucesso.");
                     }
                     break;
+                case "M":
+                    clientId = commands[1];
+                    clientIdType = commands[2];
+                    accountId = commands[3];
+                    double amount = commands[4];
+                    if(!bank.hasClient(clientId, clientIdType) || !bank.hasClient(sharedClientId, sharedClientIdType)){
+                        System.out.println("Cliente inexistente.");
+                    }
+                    else if (!bank.hasAccount(accountId)){
+                        System.out.println("Conta inexistente");
+                    }
+                    else if (!bank.shareAccount(clientId, clientIdType, accountId, sharedClientId, sharedClientIdType)){
+                        System.out.println("Cliente não autorizado.");
+                    }
+                    else if (!bank.isCashflowAllowed(accountId, montante)){
+                        System.out.println("Montante não autorizado");
+                    }
+                    else{
+                        bank.registerCashflow(clientId, clientIdType, accountId, amount);
+                    }
                 default:
                     System.out.println("Instrução inválida.");
             }

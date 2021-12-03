@@ -5,15 +5,14 @@ import models.Client;
 import java.util.Collection;
 
 public class Bank {
-    public boolean hasClient(final String clientId, final String clientIdType) {
-            return false;
-    }
+    public boolean hasClient(final String clientId, final String clientIdType) { return false; }
 
     public void createClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
 
     }
 
     public void changeClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
+
     }
 
     public Collection<Client> getClients() {
@@ -24,9 +23,7 @@ public class Bank {
         return false;
     }
 
-    public String createAccount(final String clientId, final String clientIdType, final boolean allowDebt, final double amount) {
-        return null;
-    }
+    public String createAccount(final String clientId, final String clientIdType, final boolean allowDebt, final double amount) { return null; }
 
     public boolean isAmountValid(final double amount, final boolean allowDebt) {
         return false;
@@ -36,7 +33,11 @@ public class Bank {
         return false;
     }
 
-    public void shareAccount(final String clientId, final String clientIdType, final String accountId, final String sharedClientId, final String sharedClientIdType) {
+    public void shareAccount(final String clientId, final String clientIdType, final String accountId, final String sharedClientId, final String sharedClientIdType) {}
+
+    public boolean isCashflowAllowed(final String accountId, final double amount){ return false; }
+
+    public void registerCashflow(final String clientId, final String clientIdType, final String accountId, final double amount){
 
     }
 }
