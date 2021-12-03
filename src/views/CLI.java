@@ -102,7 +102,7 @@ public class CLI {
                     clientId = commands[1];
                     clientIdType = commands[2];
                     accountId = commands[3];
-                    double amount = commands[4];
+                    amount = commands[4];
                     if(!bank.hasClient(clientId, clientIdType) || !bank.hasClient(sharedClientId, sharedClientIdType)){
                         System.out.println("Cliente inexistente.");
                     }
@@ -117,6 +117,7 @@ public class CLI {
                     }
                     else{
                         bank.registerCashflow(clientId, clientIdType, accountId, amount);
+                        System.out.println("Movimento efetuado com sucesso.");
                     }
                 default:
                     System.out.println("Instrução inválida.");
