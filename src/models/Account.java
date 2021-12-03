@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Collection;
+
 public class Account {
     public double getBalance() { return 0; }
 
@@ -7,7 +9,7 @@ public class Account {
 
     public String getID() { return null; }
 
-    public boolean getAllowDebt() { return null; }
+    public boolean getAllowDebt() { return false; }
 
     public Collection<Client> getSharedClients() { return null; }
 
