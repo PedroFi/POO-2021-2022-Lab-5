@@ -2,7 +2,6 @@ package views;
 
 import controllers.Bank;
 import models.Client;
-
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -15,13 +14,13 @@ public class CLI {
             final String[] commands = line.split(" ");
             switch(commands[0]) {
                 case "RC":
-                    final var clientID = commands[1];
-                    final var clientIDType = commands[2];
-                    final var birthday = commands[3];
-                    final var email = commands[4];
-                    final var phoneNumber = commands[5];
-                    final var clientName = scanner.nextLine();
-                    final var address = scanner.nextLine();
+                    var clientID = commands[1];
+                    var clientIDType = commands[2];
+                    var birthday = commands[3];
+                    var email = commands[4];
+                    var phoneNumber = commands[5];
+                    var clientName = scanner.nextLine();
+                    var address = scanner.nextLine();
                     if(bank.hasClient(clientID, clientIDType)) {
                         System.out.println("Cliente existente.");
                     } else {
@@ -30,15 +29,15 @@ public class CLI {
                     }
                     break;
                 case "AC":
-                    final var clientID = commands[1];
-                    final var clientIDType = commands[2];
-                    final var clientParams = scanner.nextLine();
+                    clientID = commands[1];
+                    clientIDType = commands[2];
+                    var clientParams = scanner.nextLine();
                     var splits = clientParams.split(" ");
-                    final var birthday = splits[0];
-                    final var email = splits[1];
-                    final var phoneNumber = splits[2];
-                    final var clientName = scanner.nextLine();
-                    final var address = scanner.nextLine();
+                    birthday = splits[0];
+                    email = splits[1];
+                    phoneNumber = splits[2];
+                    clientName = scanner.nextLine();
+                    address = scanner.nextLine();
                     if(!bank.hasClient(clientID, clientIDType)) {
                         System.out.println("Cliente inexistente.");
                     } else {
@@ -62,10 +61,10 @@ public class CLI {
                     }
                     break;
                 case "NC":
-                    final var clientID = commands[1];
-                    final var clientIDType = commands[2];
-                    final var allowDebtParam = commands[3];
-                    final var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
+                    clientID = commands[1];
+                    clientIDType = commands[2];
+                    var allowDebtParam = commands[3];
+                    var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
                     var amount = 0.0;
                     if(commands.length == 5) {
                         amount = Double.parseDouble(commands[4]);
@@ -80,28 +79,28 @@ public class CLI {
                     }
                     break;
                 case "PC":
-                    final var clientID = commands[1];
-                    final var clientIDType = commands[2];
-                    final var accountID = commands[3];
-                    var splits = scanner.nextLine().split(" ");
-                    final var sharedclientID = splits[0];
-                    final var sharedclientIDType = splits[1];
-                    if(!bank.hasClient(clientID, clientIDType) || !bank.hasClient(sharedclientID, sharedclientIDType)) {
+                    clientID = commands[1];
+                    clientIDType = commands[2];
+                    var accountID = commands[3];
+                    splits = scanner.nextLine().split(" ");
+                    var sharedClientID = splits[0];
+                    var sharedClientIDType = splits[1];
+                    if(!bank.hasClient(clientID, clientIDType) || !bank.hasClient(sharedClientID, sharedClientIDType)) {
                         System.out.println("Cliente inexistente.");
                     }
                     else if(!bank.hasAccount(accountID)) {
                         System.out.println("Conta inexistente.");
                     }
                     else {
-                        bank.shareAccount(clientID, clientIDType, accountID, sharedclientID, sharedclientIDType);
+                        bank.shareAccount(clientID, clientIDType, accountID, sharedClientID, sharedClientIDType);
                         System.out.println("Conta partilhada com sucesso.");
                     }
                     break;
                 case "M":
-                    final var clientID = commands[1];
-                    final var clientIDType = commands[2];
-                    final var accountID = commands[3];
-                    final var amount = (double)commands[4];
+                    clientID = commands[1];
+                    clientIDType = commands[2];
+                    accountID = commands[3];
+                    amount = Double.parseDouble(commands[4]);
                     if(!bank.hasClient(clientID, clientIDType)) {
                         System.out.println("Cliente inexistente.");
                     }
