@@ -109,7 +109,7 @@ public class CLI {
                     else if (!bank.hasAccount(accountId)){
                         System.out.println("Conta inexistente");
                     }
-                    else if (!bank.shareAccount(clientId, clientIdType, accountId, sharedClientId, sharedClientIdType)){
+                    else if (!bank.isAuthorized(clientId, clientIdType, accountId)){
                         System.out.println("Cliente não autorizado.");
                     }
                     else if (!bank.isCashflowAllowed(accountId, amount)){

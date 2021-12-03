@@ -40,4 +40,5 @@ public class Bank {
     public void registerCashflow(final String clientId, final String clientIdType, final String accountId, final double amount){
 
     }
+    public boolean isAuthorized(final String clientId, final String clientIdType, final String accountId) { return false; }
 }
