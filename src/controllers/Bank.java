@@ -5,26 +5,21 @@ import models.Client;
 import java.util.Collection;
 
 public class Bank {
-    public boolean hasClient(final String clientId, final String clientIdType) {
+    public boolean hasClient(final String clientID, final String clientIDType) {
             return false;
     }
 
-    public void createClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
-
+    public void createClient(final String clientID, final String clientIDType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
     }
 
-    public void changeClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
-    }
-
-    public Collection<Client> getClients() {
-        return null;
+    public void changeClient(final String clientID, final String clientIDType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
     }
 
     public boolean hasClients() {
         return false;
     }
 
-    public String createAccount(final String clientId, final String clientIdType, final boolean allowDebt, final double amount) {
+    public Collection<Client> getClients() {
         return null;
     }
 
@@ -32,11 +27,38 @@ public class Bank {
         return false;
     }
 
-    public boolean hasAccount(final String accountId) {
+    public String createAccount(final String clientID, final String clientIDType, final boolean allowDebt, final double amount) {
+        return null;
+    }
+
+    public boolean hasAccount(final String accountID) {
         return false;
     }
 
-    public void shareAccount(final String clientId, final String clientIdType, final String accountId, final String sharedClientId, final String sharedClientIdType) {
+    public void shareAccount(final String clientID, final String clientIDType, final String accountID, final String sharedclientID, final String sharedclientIDType) {
+    }
+
+    public boolean isAuthorized(String clientID, String clientIDType, String accountID) {
+
+    }
+
+    public boolean isCashflowAllowed(String accountID, double amount) {
+
+    }
+
+    public void registerCashflow(String clientID, String clientIDType, String accountID, double amount) {
+
+    }
+
+    public Account getAccount(String accountID) {
+
+    }
+
+    public void save(String filename) {
+
+    }
+
+    public static Bank load(String filename) {
 
     }
 }
