@@ -33,7 +33,7 @@ public class CLI {
                     clientId = commands[1];
                     clientIdType = commands[2];
                     final var clientParams = scanner.nextLine();
-                    final var splits = clientParams.split(" ");
+                    var splits = clientParams.split(" ");
                     birthday = splits[0];
                     email = splits[1];
                     phoneNumber = splits[2];
@@ -77,6 +77,25 @@ public class CLI {
                     } else {
                         String accountId = bank.createAccount(clientId, clientIdType, allowDebt, amount);
                         System.out.println("Conta criada com o identificador " + accountId);
+                    }
+                    break;
+                case "PC":
+                    clientId = commands[1];
+                    clientIdType = commands[2];
+                    var accountId = commands[3];
+                    splits = scanner.nextLine().split(" ");
+                    var sharedClientId = splits[0];
+                    var sharedClientIdType = splits[1];
+                    if(!bank.hasClient(clientId, clientIdType) ||
+                        !bank.hasClient(sharedClientId, sharedClientIdType)) {
+                        System.out.println("Cliente inexistente.");
+                    }
+                    else if(!bank.hasAccount(accountId)) {
+                        System.out.println("Conta inexistente.");
+                    }
+                    else {
+                        bank.shareAccount(clientId, clientIdType, accountId, sharedClientId, sharedClientIdType);
+                        System.out.println("Conta partilhada com sucesso.");
                     }
                     break;
                 default:

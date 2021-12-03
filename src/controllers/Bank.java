@@ -31,4 +31,12 @@ public class Bank {
     public boolean isAmountValid(final double amount, final boolean allowDebt) {
         return false;
     }
+
+    public boolean hasAccount(final String accountId) {
+        return false;
+    }
+
+    public void shareAccount(final String clientId, final String clientIdType, final String accountId, final String sharedClientId, final String sharedClientIdType) {
+
+    }
 }
