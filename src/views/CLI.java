@@ -1,9 +1,11 @@
 package views;
 
 import controllers.Bank;
+import models.Account;
 import models.Client;
-
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class CLI {
@@ -32,7 +34,7 @@ public class CLI {
                 case "AC":
                     clientId = commands[1];
                     clientIdType = commands[2];
-                    final var clientParams = scanner.nextLine();
+                    var clientParams = scanner.nextLine();
                     var splits = clientParams.split(" ");
                     birthday = splits[0];
                     email = splits[1];
@@ -51,7 +53,7 @@ public class CLI {
                         System.out.println("Sem clientes registados.");
                     } else {
                         Collection<Client> clients = bank.getClients();
-                        // TODO: sort the client collection
+                        Collections.sort((List<Client>)clients);
                         for(final var client : clients) {
                             System.out.println("[" + client.getId() + " " + client.getIdTypeSymbol() + "]" +
                                     client.getBirthday() + " " + client.getName() +
@@ -64,8 +66,8 @@ public class CLI {
                 case "NC":
                     clientId = commands[1];
                     clientIdType = commands[2];
-                    final var allowDebtParam = commands[3];
-                    final var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
+                    var allowDebtParam = commands[3];
+                    var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
                     var amount = 0.0;
                     if(commands.length == 5) {
                         amount = Double.parseDouble(commands[4]);
@@ -84,17 +86,16 @@ public class CLI {
                     clientIdType = commands[2];
                     var accountId = commands[3];
                     splits = scanner.nextLine().split(" ");
-                    var sharedClientId = splits[0];
-                    var sharedClientIdType = splits[1];
-                    if(!bank.hasClient(clientId, clientIdType) ||
-                        !bank.hasClient(sharedClientId, sharedClientIdType)) {
+                    var sharedclientId = splits[0];
+                    var sharedclientIdType = splits[1];
+                    if(!bank.hasClient(clientId, clientIdType) || !bank.hasClient(sharedclientId, sharedclientIdType)) {
                         System.out.println("Cliente inexistente.");
                     }
                     else if(!bank.hasAccount(accountId)) {
                         System.out.println("Conta inexistente.");
                     }
                     else {
-                        bank.shareAccount(clientId, clientIdType, accountId, sharedClientId, sharedClientIdType);
+                        bank.shareAccount(clientId, clientIdType, accountId, sharedclientId, sharedclientIdType);
                         System.out.println("Conta partilhada com sucesso.");
                     }
                     break;
@@ -103,6 +104,7 @@ public class CLI {
                     clientIdType = commands[2];
                     accountId = commands[3];
                     amount = Double.parseDouble(commands[4]);
+
                     if(!bank.hasClient(clientId, clientIdType)){
                         System.out.println("Cliente inexistente.");
                     }
@@ -119,10 +121,33 @@ public class CLI {
                         bank.registerCashflow(clientId, clientIdType, accountId, amount);
                         System.out.println("Movimento efetuado com sucesso.");
                     }
+                    break;
+                case "SC":
+                    clientId = commands[1];
+                    clientIdType = commands[2];
+                    accountId = commands[3];
+                    if(!bank.hasClient(clientId, clientIdType)) {
+                        System.out.println("Cliente inexistente.");
+                    }
+                    else if(!bank.hasAccount(accountId)) {
+                        System.out.println("Conta inexistente.");
+                    }
+                    else if(!bank.isAuthorized(clientId, clientIdType, accountId)) {
+                        System.out.println("Cliente não autorizado.");
+                    }
+                    else {
+                        Account account = bank.getAccount(accountId);
+                        Collection<Client> clients = account.getSharedClients();
+                        Collections.sort((List<Client>)clients);
+                        for(final var client : clients) {
+                            System.out.println(client.getName() + "[" + client.getId() + " " + client.getIdTypeSymbol() + "]\n");
+                        }
+                        System.out.print(account.getAllowDebt() + "\n" + account.getBalance());
+                    }
+                    break;
                 default:
                     System.out.println("Instrução inválida.");
             }
-
         }
     }
 }
