@@ -2,7 +2,7 @@ package models;
 
 import java.util.Collection;
 
-public class Client {
+public class Client implements Comparable<Client> {
     public String getId() {
         return null;
     }
@@ -34,4 +34,9 @@ public class Client {
     public Collection<Account> getAccounts() { return null; }
 
     public Collection<Account> getSharedAccounts() { return null; }
+
+    @Override
+    public int compareTo(Client e) {
+        return this.getName().compareTo(e.getName());
+    }
 }

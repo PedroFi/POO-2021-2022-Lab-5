@@ -5,14 +5,14 @@ import models.Client;
 import java.util.Collection;
 
 public class Bank {
-    public boolean hasClient(final String clientID, final String clientIDType) {
+    public boolean hasClient(final String clientId, final String clientIdType) {
             return false;
     }
 
-    public void createClient(final String clientID, final String clientIDType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
+    public void createClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
     }
 
-    public void changeClient(final String clientID, final String clientIDType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
+    public void changeClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
     }
 
     public boolean hasClients() {
@@ -27,30 +27,30 @@ public class Bank {
         return false;
     }
 
-    public String createAccount(final String clientID, final String clientIDType, final boolean allowDebt, final double amount) {
+    public String createAccount(final String clientId, final String clientIdType, final boolean allowDebt, final double amount) {
         return null;
     }
 
-    public boolean hasAccount(final String accountID) {
+    public boolean hasAccount(final String accountId) {
         return false;
     }
 
-    public void shareAccount(final String clientID, final String clientIDType, final String accountID, final String sharedClientID, final String sharedClientIDType) {
+    public void shareAccount(final String clientId, final String clientIdType, final String accountId, final String sharedclientId, final String sharedclientIdType) {
     }
 
-    public boolean isAuthorized(String clientID, String clientIDType, String accountID) {
+    public boolean isAuthorized(String clientId, String clientIdType, String accountId) {
         return false;
     }
 
-    public boolean isCashFlowAllowed(String accountID, double amount) {
+    public boolean isCashFlowAllowed(String accountId, double amount) {
         return false;
     }
 
-    public void registerCashFlow(String clientID, String clientIDType, String accountID, double amount) {
+    public void registerCashFlow(String clientId, String clientIdType, String accountId, double amount) {
 
     }
 
-    public Account getAccount(String accountID) {
+    public Account getAccount(String accountId) {
         return null;
     }
 

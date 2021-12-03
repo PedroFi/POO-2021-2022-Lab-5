@@ -1,8 +1,11 @@
 package views;
 
 import controllers.Bank;
+import models.Account;
 import models.Client;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class CLI {
@@ -14,23 +17,23 @@ public class CLI {
             final String[] commands = line.split(" ");
             switch(commands[0]) {
                 case "RC":
-                    var clientID = commands[1];
-                    var clientIDType = commands[2];
+                    var clientId = commands[1];
+                    var clientIdType = commands[2];
                     var birthday = commands[3];
                     var email = commands[4];
                     var phoneNumber = commands[5];
                     var clientName = scanner.nextLine();
                     var address = scanner.nextLine();
-                    if(bank.hasClient(clientID, clientIDType)) {
+                    if(bank.hasClient(clientId, clientIdType)) {
                         System.out.println("Cliente existente.");
                     } else {
-                        bank.createClient(clientID, clientIDType, birthday, email, phoneNumber, clientName, address);
+                        bank.createClient(clientId, clientIdType, birthday, email, phoneNumber, clientName, address);
                         System.out.println("Cliente registado com sucesso.");
                     }
                     break;
                 case "AC":
-                    clientID = commands[1];
-                    clientIDType = commands[2];
+                    clientId = commands[1];
+                    clientIdType = commands[2];
                     var clientParams = scanner.nextLine();
                     var splits = clientParams.split(" ");
                     birthday = splits[0];
@@ -38,10 +41,10 @@ public class CLI {
                     phoneNumber = splits[2];
                     clientName = scanner.nextLine();
                     address = scanner.nextLine();
-                    if(!bank.hasClient(clientID, clientIDType)) {
+                    if(!bank.hasClient(clientId, clientIdType)) {
                         System.out.println("Cliente inexistente.");
                     } else {
-                        bank.changeClient(clientID, clientIDType, birthday, email, phoneNumber, clientName, address);
+                        bank.changeClient(clientId, clientIdType, birthday, email, phoneNumber, clientName, address);
                         System.out.println("Dados de cliente alterados com sucesso.");
                     }
                     break;
@@ -50,7 +53,7 @@ public class CLI {
                         System.out.println("Sem clientes registados.");
                     } else {
                         Collection<Client> clients = bank.getClients();
-                        // TODO: sort the client collection
+                        Collections.sort((List<Client>)clients);
                         for(final var client : clients) {
                             System.out.println("[" + client.getId() + " " + client.getIdTypeSymbol() + "]" +
                                     client.getBirthday() + " " + client.getName() +
@@ -61,60 +64,83 @@ public class CLI {
                     }
                     break;
                 case "NC":
-                    clientID = commands[1];
-                    clientIDType = commands[2];
+                    clientId = commands[1];
+                    clientIdType = commands[2];
                     var allowDebtParam = commands[3];
                     var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
                     var amount = 0.0;
                     if(commands.length == 5) {
                         amount = Double.parseDouble(commands[4]);
                     }
-                    if(!bank.hasClient(clientID, clientIDType)) {
+                    if(!bank.hasClient(clientId, clientIdType)) {
                         System.out.println("Cliente inexistente.");
                     } else if(!bank.isAmountValid(amount, allowDebt)) {
                         System.out.println("Montante não autorizado.");
                     } else {
-                        String accountID = bank.createAccount(clientID, clientIDType, allowDebt, amount);
-                        System.out.println("Conta criada com o identificador " + accountID);
+                        String accountId = bank.createAccount(clientId, clientIdType, allowDebt, amount);
+                        System.out.println("Conta criada com o identificador " + accountId);
                     }
                     break;
                 case "PC":
-                    clientID = commands[1];
-                    clientIDType = commands[2];
-                    var accountID = commands[3];
+                    clientId = commands[1];
+                    clientIdType = commands[2];
+                    var accountId = commands[3];
                     splits = scanner.nextLine().split(" ");
-                    var sharedClientID = splits[0];
-                    var sharedClientIDType = splits[1];
-                    if(!bank.hasClient(clientID, clientIDType) || !bank.hasClient(sharedClientID, sharedClientIDType)) {
+                    var sharedclientId = splits[0];
+                    var sharedclientIdType = splits[1];
+                    if(!bank.hasClient(clientId, clientIdType) || !bank.hasClient(sharedclientId, sharedclientIdType)) {
                         System.out.println("Cliente inexistente.");
                     }
-                    else if(!bank.hasAccount(accountID)) {
+                    else if(!bank.hasAccount(accountId)) {
                         System.out.println("Conta inexistente.");
                     }
                     else {
-                        bank.shareAccount(clientID, clientIDType, accountID, sharedClientID, sharedClientIDType);
+                        bank.shareAccount(clientId, clientIdType, accountId, sharedclientId, sharedclientIdType);
                         System.out.println("Conta partilhada com sucesso.");
                     }
                     break;
                 case "M":
-                    clientID = commands[1];
-                    clientIDType = commands[2];
-                    accountID = commands[3];
+                    clientId = commands[1];
+                    clientIdType = commands[2];
+                    accountId = commands[3];
                     amount = Double.parseDouble(commands[4]);
-                    if(!bank.hasClient(clientID, clientIDType)) {
+                    if(!bank.hasClient(clientId, clientIdType)) {
                         System.out.println("Cliente inexistente.");
                     }
-                    else if(!bank.hasAccount(accountID)) {
+                    else if(!bank.hasAccount(accountId)) {
                         System.out.println("Conta inexistente.");
                     }
-                    else if(!bank.isAuthorized(clientID, clientIDType, accountID)) {
+                    else if(!bank.isAuthorized(clientId, clientIdType, accountId)) {
                         System.out.println("Cliente não autorizado.");
                     }
-                    else if(!bank.isAmountValid(amount, bank.getAccount(accountID).getAllowDebt())) {
+                    else if(!bank.isAmountValid(amount, bank.getAccount(accountId).getAllowDebt())) {
                         System.out.println("Montante não autorizado.");
                     }
                     else {
                         System.out.println("Movimento efetuado com sucesso.");
+                    }
+                    break;
+                case "SC":
+                    clientId = commands[1];
+                    clientIdType = commands[2];
+                    accountId = commands[3];
+                    if(!bank.hasClient(clientId, clientIdType)) {
+                        System.out.println("Cliente inexistente.");
+                    }
+                    else if(!bank.hasAccount(accountId)) {
+                        System.out.println("Conta inexistente.");
+                    }
+                    else if(!bank.isAuthorized(clientId, clientIdType, accountId)) {
+                        System.out.println("Cliente não autorizado.");
+                    }
+                    else {
+                        Account account = bank.getAccount(accountId);
+                        Collection<Client> clients = account.getSharedClients();
+                        Collections.sort((List<Client>)clients);
+                        for(final var client : clients) {
+                            System.out.println(client.getName() + "[" + client.getId() + " " + client.getIdTypeSymbol() + "]\n");
+                        }
+                        System.out.print(account.getAllowDebt() + "\n" + account.getBalance());
                     }
                     break;
                 default:
