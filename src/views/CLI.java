@@ -112,7 +112,7 @@ public class CLI {
                     else if (!bank.shareAccount(clientId, clientIdType, accountId, sharedClientId, sharedClientIdType)){
                         System.out.println("Cliente não autorizado.");
                     }
-                    else if (!bank.isCashflowAllowed(accountId, montante)){
+                    else if (!bank.isCashflowAllowed(accountId, amount)){
                         System.out.println("Montante não autorizado");
                     }
                     else{
