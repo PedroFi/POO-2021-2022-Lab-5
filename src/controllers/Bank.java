@@ -1,7 +1,7 @@
 package controllers;
 
+import models.Account;
 import models.Client;
-
 import java.util.Collection;
 
 public class Bank {
@@ -35,23 +35,23 @@ public class Bank {
         return false;
     }
 
-    public void shareAccount(final String clientID, final String clientIDType, final String accountID, final String sharedclientID, final String sharedclientIDType) {
+    public void shareAccount(final String clientID, final String clientIDType, final String accountID, final String sharedClientID, final String sharedClientIDType) {
     }
 
     public boolean isAuthorized(String clientID, String clientIDType, String accountID) {
-
+        return false;
     }
 
-    public boolean isCashflowAllowed(String accountID, double amount) {
-
+    public boolean isCashFlowAllowed(String accountID, double amount) {
+        return false;
     }
 
-    public void registerCashflow(String clientID, String clientIDType, String accountID, double amount) {
+    public void registerCashFlow(String clientID, String clientIDType, String accountID, double amount) {
 
     }
 
     public Account getAccount(String accountID) {
-
+        return null;
     }
 
     public void save(String filename) {
@@ -59,6 +59,6 @@ public class Bank {
     }
 
     public static Bank load(String filename) {
-
+        return null;
     }
 }
