@@ -114,11 +114,11 @@ public class CLI {
                     else if (!bank.isAuthorized(clientId, clientIdType, accountId)){
                         System.out.println("Cliente não autorizado.");
                     }
-                    else if (!bank.isCashflowAllowed(accountId, amount)){
+                    else if (!bank.isCashFlowAllowed(accountId, amount)){
                         System.out.println("Montante não autorizado.");
                     }
                     else{
-                        bank.registerCashflow(clientId, clientIdType, accountId, amount);
+                        bank.registerCashFlow(clientId, clientIdType, accountId, amount);
                         System.out.println("Movimento efetuado com sucesso.");
                     }
                     break;

@@ -5,13 +5,14 @@ import models.Client;
 import java.util.Collection;
 
 public class Bank {
-    public boolean hasClient(final String clientId, final String clientIdType) { return false; }
+    public boolean hasClient(final String clientId, final String clientIdType) {
+        return false;
+    }
 
     public void createClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
     }
 
     public void changeClient(final String clientId, final String clientIdType, final String birthday, final String email, final String phoneNumber, final String clientName, final String address) {
-
     }
 
     public boolean hasClients() {
@@ -26,7 +27,9 @@ public class Bank {
         return false;
     }
 
-    public String createAccount(final String clientId, final String clientIdType, final boolean allowDebt, final double amount) { return null; }
+    public String createAccount(final String clientId, final String clientIdType, final boolean allowDebt, final double amount) {
+        return null;
+    }
 
     public boolean hasAccount(final String accountId) {
         return false;
@@ -44,7 +47,6 @@ public class Bank {
     }
 
     public void registerCashFlow(String clientId, String clientIdType, String accountId, double amount) {
-
     }
 
     public Account getAccount(String accountId) {
@@ -52,7 +54,6 @@ public class Bank {
     }
 
     public void save(String filename) {
-
     }
 
     public static Bank load(String filename) {

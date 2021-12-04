@@ -31,9 +31,13 @@ public class Client implements Comparable<Client> {
         return null;
     }
 
-    public Collection<Account> getAccounts() { return null; }
+    public Collection<Account> getAccounts() {
+        return null;
+    }
 
-    public Collection<Account> getSharedAccounts() { return null; }
+    public Collection<Account> getSharedAccounts() {
+        return null;
+    }
 
     @Override
     public int compareTo(Client e) {
