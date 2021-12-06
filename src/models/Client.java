@@ -15,43 +15,8 @@ public class Client implements Comparable<Client> {
     private Collection<Account> sharedAccounts;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public Client(final String id, final IdentificationType idTypeSymbol) {
-        this.id = id;
-        this.idTypeSymbol = idTypeSymbol;
-    }
-
-    public Client(final String name, final String id, final IdentificationType idTypeSymbol) {
-        this.name = name;
-        this.id = id;
-        this.idTypeSymbol = idTypeSymbol;
-    }
-
-    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday) {
-        this.name = name;
-        this.id = id;
-        this.idTypeSymbol = idTypeSymbol;
-        this.birthday = birthday;
-    }
-
-    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday, final String address) {
-        this.name = name;
-        this.id = id;
-        this.idTypeSymbol = idTypeSymbol;
-        this.birthday = birthday;
-        this.address = address;
-    }
-
-    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday, final String address, final String email) {
-        this.name = name;
-        this.id = id;
-        this.idTypeSymbol = idTypeSymbol;
-        this.birthday = birthday;
-        this.address = address;
-        this.email = email;
-    }
-
-    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday, final String address, final String email, final String phoneNumber) {
+    
+    public Client(final String id, final IdentificationType idTypeSymbol, final String name = null, final Date birthday = null, final String address = null, final String email = null, final String phoneNumber = null) {
         this.name = name;
         this.id = id;
         this.idTypeSymbol = idTypeSymbol;
