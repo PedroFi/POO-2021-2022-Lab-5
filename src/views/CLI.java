@@ -8,8 +8,8 @@ import java.util.*;
 
 public class CLI {
     public CLI() {
-        final var scanner = new Scanner(System.in);
-        Bank bank = new Bank();
+        final Scanner scanner = new Scanner(System.in);
+        final Bank bank = new Bank();
         while(true) {
             final var line = scanner.nextLine();
             final String[] commands = line.split(" ");
@@ -32,7 +32,7 @@ public class CLI {
                 case "AC":
                     clientId = commands[1];
                     clientIdType = commands[2];
-                    var clientParams = scanner.nextLine();
+                    final var clientParams = scanner.nextLine();
                     var splits = clientParams.split(" ");
                     birthday = splits[0];
                     email = splits[1];
@@ -50,7 +50,7 @@ public class CLI {
                     if(!bank.hasClients()) {
                         System.out.println("Sem clientes registados.");
                     } else {
-                        List<Client> clients = (List<Client>)bank.getClients();
+                        final List<Client> clients = (List<Client>)bank.getClients();
                         Collections.sort(clients);
                         for(final var client : clients) {
                             System.out.println("[" + client.getId() + " " + client.getIdTypeSymbol() + "]" +
@@ -64,8 +64,8 @@ public class CLI {
                 case "NC":
                     clientId = commands[1];
                     clientIdType = commands[2];
-                    var allowDebtParam = commands[3];
-                    var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
+                    final var allowDebtParam = commands[3];
+                    final var allowDebt = allowDebtParam.equalsIgnoreCase("Sim");
                     var amount = 0.0;
                     if(commands.length == 5) {
                         amount = Double.parseDouble(commands[4]);
@@ -75,7 +75,7 @@ public class CLI {
                     } else if(!bank.isAmountValid(amount, allowDebt)) {
                         System.out.println("Montante não autorizado.");
                     } else {
-                        String accountId = bank.createAccount(clientId, clientIdType, allowDebt, amount);
+                        final String accountId = bank.createAccount(clientId, clientIdType, allowDebt, amount);
                         System.out.println("Conta criada com o identificador " + accountId);
                     }
                     break;
@@ -84,8 +84,8 @@ public class CLI {
                     clientIdType = commands[2];
                     var accountId = commands[3];
                     splits = scanner.nextLine().split(" ");
-                    var sharedclientId = splits[0];
-                    var sharedclientIdType = splits[1];
+                    final var sharedclientId = splits[0];
+                    final var sharedclientIdType = splits[1];
                     if(!bank.hasClient(clientId, clientIdType) || !bank.hasClient(sharedclientId, sharedclientIdType)) {
                         System.out.println("Cliente inexistente.");
                     }
@@ -133,8 +133,8 @@ public class CLI {
                         System.out.println("Cliente não autorizado.");
                     }
                     else {
-                        Account account = bank.getAccount(accountId);
-                        List<Client> clients = account.getSharedClients();
+                        final Account account = bank.getAccount(accountId);
+                        final List<Client> clients = account.getSharedClients();
                         Collections.sort(clients);
                         for(final var client : clients) {
                             System.out.println(client.getName() + "[" + client.getId() + " " + client.getIdTypeSymbol() + "]\n");
