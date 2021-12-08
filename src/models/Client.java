@@ -1,22 +1,57 @@
 package models;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.Hashtable;
 
 public class Client implements Comparable<Client> {
     private String name;
-    private String id;
-    private IdentificationType idTypeSymbol;
+    private final String id;
+    private final IdentificationType idTypeSymbol;
     private Date birthday;
     private String address;
     private String email;
     private String phoneNumber;
-    private Collection<Account> accounts;
-    private Collection<Account> sharedAccounts;
+    private final Hashtable<String, Account> accounts = new Hashtable<>(101);
+    private final Hashtable<String, Account> sharedAccounts = new Hashtable<>(101);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public Client(final String id, final IdentificationType idTypeSymbol, final String name = null, final Date birthday = null, final String address = null, final String email = null, final String phoneNumber = null) {
+
+    public Client(final String id, final IdentificationType idTypeSymbol) {
+        this.id = id;
+        this.idTypeSymbol = idTypeSymbol;
+    }
+
+    public Client(final String name, final String id, final IdentificationType idTypeSymbol) {
+        this.name = name;
+        this.id = id;
+        this.idTypeSymbol = idTypeSymbol;
+    }
+
+    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday) {
+        this.name = name;
+        this.id = id;
+        this.idTypeSymbol = idTypeSymbol;
+        this.birthday = birthday;
+    }
+
+    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday, final String address) {
+        this.name = name;
+        this.id = id;
+        this.idTypeSymbol = idTypeSymbol;
+        this.birthday = birthday;
+        this.address = address;
+    }
+
+    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday, final String address, final String email) {
+        this.name = name;
+        this.id = id;
+        this.idTypeSymbol = idTypeSymbol;
+        this.birthday = birthday;
+        this.address = address;
+        this.email = email;
+    }
+
+    public Client(final String name, final String id, final IdentificationType idTypeSymbol, final Date birthday, final String address, final String email, final String phoneNumber) {
         this.name = name;
         this.id = id;
         this.idTypeSymbol = idTypeSymbol;
@@ -76,28 +111,28 @@ public class Client implements Comparable<Client> {
         this.phoneNumber = phoneNumber;
     }
 
-    public Collection<Account> getAccounts() {
+    public Hashtable<String, Account> getAccounts() {
         return accounts;
     }
 
-    public boolean addAccount(final Account account) {
-        return this.accounts.add(account);
+    public void addAccount(final Account account) {
+        this.accounts.put(account.getId(), account);
     }
 
-    public boolean removeAccount(final Account account) {
-        return this.accounts.remove(account);
+    public void removeAccount(final Account account) {
+        this.accounts.remove(account.getId(), account);
     }
 
-    public Collection<Account> getSharedAccounts() {
+    public Hashtable<String, Account> getSharedAccounts() {
         return sharedAccounts;
     }
 
-    public boolean addSharedAccount(final Account sharedAccount) {
-        return this.sharedAccounts.add(sharedAccount);
+    public void addSharedAccount(final Account sharedAccount) {
+        this.sharedAccounts.put(sharedAccount.getId(), sharedAccount);
     }
 
-    public boolean removeSharedAccount(final Account sharedAccount) {
-        return this.sharedAccounts.remove(sharedAccount);
+    public void removeSharedAccount(final Account sharedAccount) {
+        this.sharedAccounts.remove(sharedAccount.getId(), sharedAccount);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
