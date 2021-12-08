@@ -55,7 +55,7 @@ public class Account {
     }
 
     public void makeMovement(final CashFlow cashFlow) {
-        if (getBalance() >= cashFlow.getValue() || allowDept()) {
+        if (getBalance() >= cashFlow.getValue() || getAllowDept()) {
             cashFlows.add(cashFlow);
             balance += (cashFlow.getValue() - 0.42);
         }
@@ -69,7 +69,7 @@ public class Account {
         return cashFlows;
     }
 
-    public boolean allowDept(){
+    public boolean getAllowDept(){
         return allowDept;
     }
 
