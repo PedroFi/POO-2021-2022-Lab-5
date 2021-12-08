@@ -3,10 +3,8 @@ package views;
 import controllers.Bank;
 import models.Account;
 import models.Client;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class CLI {
     public CLI() {
@@ -52,8 +50,8 @@ public class CLI {
                     if(!bank.hasClients()) {
                         System.out.println("Sem clientes registados.");
                     } else {
-                        Collection<Client> clients = bank.getClients();
-                        Collections.sort((List<Client>)clients);
+                        List<Client> clients = (List<Client>)bank.getClients();
+                        Collections.sort(clients);
                         for(final var client : clients) {
                             System.out.println("[" + client.getId() + " " + client.getIdTypeSymbol() + "]" +
                                     client.getBirthday() + " " + client.getName() +
@@ -136,12 +134,12 @@ public class CLI {
                     }
                     else {
                         Account account = bank.getAccount(accountId);
-                        Collection<Client> clients = account.getSharedClients();
-                        Collections.sort((List<Client>)clients);
+                        List<Client> clients = account.getSharedClients();
+                        Collections.sort(clients);
                         for(final var client : clients) {
                             System.out.println(client.getName() + "[" + client.getId() + " " + client.getIdTypeSymbol() + "]\n");
                         }
-                        System.out.print(account.getAllowDebt() + "\n" + account.getBalance());
+                        System.out.print(account.getAllowDept() + "\n" + account.getBalance());
                     }
                     break;
                 default:
