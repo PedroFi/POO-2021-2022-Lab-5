@@ -1,7 +1,8 @@
 package models;
 
 import java.util.Date;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Client implements Comparable<Client> {
     private String name;
@@ -11,8 +12,8 @@ public class Client implements Comparable<Client> {
     private String address;
     private String email;
     private String phoneNumber;
-    private final Hashtable<String, Account> accounts = new Hashtable<>(101);
-    private final Hashtable<String, Account> sharedAccounts = new Hashtable<>(101);
+    private final Map<String, Account> accounts = new HashMap<>(101);
+    private final Map<String, Account> sharedAccounts = new HashMap<>(101);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -111,7 +112,7 @@ public class Client implements Comparable<Client> {
         this.phoneNumber = phoneNumber;
     }
 
-    public Hashtable<String, Account> getAccounts() {
+    public Map<String, Account> getAccounts() {
         return accounts;
     }
 
@@ -123,7 +124,7 @@ public class Client implements Comparable<Client> {
         this.accounts.remove(account.getId(), account);
     }
 
-    public Hashtable<String, Account> getSharedAccounts() {
+    public Map<String, Account> getSharedAccounts() {
         return sharedAccounts;
     }
 
