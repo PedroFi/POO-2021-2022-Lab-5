@@ -1,14 +1,14 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class Account {
     private double balance;
     private final Client owner;
     private final String id;
-    private final List<Client> sharedClients = new ArrayList<>(80);
-    private final List<CashFlow> cashFlows = new ArrayList<>(80);
+    private final Collection<Client> sharedClients = new ArrayList<>(80);
+    private final Collection<CashFlow> cashFlows = new ArrayList<>(80);
     private boolean allowDept = false;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +42,7 @@ public class Account {
         return id;
     }
 
-    public List<Client> getSharedClients() {
+    public Collection<Client> getSharedClients() {
         return sharedClients;
     }
 
@@ -65,7 +65,7 @@ public class Account {
         return owner;
     }
 
-    public List<CashFlow> getCashFlows() {
+    public Collection<CashFlow> getCashFlows() {
         return cashFlows;
     }
 
