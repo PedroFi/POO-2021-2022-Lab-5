@@ -134,7 +134,7 @@ public class CLI {
                     }
                     else {
                         final Account account = bank.getAccount(accountId);
-                        final List<Client> clients = account.getSharedClients();
+                        final List<Client> clients = (List<Client>)account.getSharedClients();
                         Collections.sort(clients);
                         for(final var client : clients) {
                             System.out.println(client.getName() + "[" + client.getId() + " " + client.getIdTypeSymbol() + "]\n");
